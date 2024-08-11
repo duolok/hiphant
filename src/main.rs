@@ -10,6 +10,10 @@ struct Options {
     #[clap(default_value="Memory overload")]
     message: String,
 
+    #[clap(short = 'c', long="cool-eyes")]
+    /// Change eyes of the animal
+    cool_eyes: String,
+
     #[clap(short='f', long="file")]
     /// Add a path to a file
     elephant_file: Option<std::path::PathBuf>,
@@ -19,12 +23,10 @@ struct Options {
     stdin: bool,
 }
 
-
-
-
 fn main() -> Result<()> {
     let options = Options::parse();
     let message = options.message;
+
 
     println!("{}", &message);
 
