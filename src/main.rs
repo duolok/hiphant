@@ -23,10 +23,19 @@ struct Options {
     stdin: bool,
 }
 
+fn process_input(options: &Options, message: &mut String) -> Result<()> {
+    match options.stdin {
+        true => { io::stdin().read_to_string(message).context("Failed read from stdin.")?;},
+        false => { *message = options.message.clone() },
+    }
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let options = Options::parse();
-    let message = options.message;
+    let mut message = String::new();
 
+    process_input(&options, &mut message)?;
 
     println!("{}", &message);
 
