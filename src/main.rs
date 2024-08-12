@@ -1,4 +1,6 @@
+use std::{env, fs};
 use std::io::{self, Read};
+use std::path::PathBuf;
 use anyhow::{Result, Context};
 use clap::Parser;
 use colored::Colorize;
@@ -40,19 +42,27 @@ fn process_input(options: &Options, message: &mut String) -> Result<()> {
     Ok(())
 }
 
+
 fn print_animal(eye: &str, elephant_number: usize) -> Result<()> {
-    let filename = format!("animals/elephant_{}.txt", elephant_number);
-    let elephant_template = std::fs::read_to_string(&filename)
-        .with_context(|| format!("Could not read file {}", filename))?;
+    let home_dir = env::var("HOME").expect("Could not find the home directory");
+
+    let filename = PathBuf::from(home_dir)
+        .join(".config")
+        .join("hiphant")
+        .join("animals")
+        .join(format!("elephant_{}.txt", elephant_number));
+
+    let elephant_template = fs::read_to_string(&filename)
+        .with_context(|| format!("Could not read file {}", filename.display()))?;
 
     let elephant_picture = elephant_template.replace("{eye}", eye);
+
     println!(" \\");
     println!("  \\");
     println!("   \\");
     println!("{}", elephant_picture);
-    
-    Ok(())
 
+    Ok(())
 }
 
 fn main() -> Result<()> {
