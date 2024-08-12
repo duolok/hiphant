@@ -57,11 +57,9 @@ fn print_animal(eye: &str) {
 fn main() -> Result<()> {
     let options = Options::parse();
     let mut message = String::new();
-
-    // Process input from either stdin or default message
-    process_input(&options, &mut message)?;
-
     let happy_eye = if options.happy { "^" } else { "@" };
+
+    process_input(&options, &mut message)?;
 
     match &options.elephant_file {
         Some(path) => {
