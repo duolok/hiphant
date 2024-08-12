@@ -9,7 +9,7 @@ struct Options {
     #[clap(default_value="Memory overload")]
     message: String,
 
-    #[clap(short='h', long="happy")]
+    #[clap(short='s', long="smile")]
     /// Give animal happy eyes
     happy: bool,
 
@@ -30,12 +30,29 @@ fn process_input(options: &Options, message: &mut String) -> Result<()> {
     Ok(())
 }
 
+fn print_animal() {
+            println!("
+     _.-- ,.--. 
+   .'   .'    /\\
+   | @       |'..--------._
+  /      \\._/              '.
+ /  .-.-                     \\
+(  /    \\                     \\
+ \\\\      '.                  | #
+  \\\\       \\   -.           /
+   :\\       |    )._____.'   \\
+            |   /  \\  |  \\    )
+            |   |./'  :__ \\.-'
+            '--'
+"
+            );
+}
+
 fn main() -> Result<()> {
     let options = Options::parse();
     let mut message = String::new();
 
     process_input(&options, &mut message)?;
-
 
     let happy_eye = if options.happy { "^" } else { "o" };
     
@@ -53,10 +70,13 @@ fn main() -> Result<()> {
             println!("{}", &_elephant_picture);
         }, 
         None => {
-
+            println!("{}", message.bright_cyan().underline());
+            println!(" \\");
+            println!("  \\");
+            println!("   \\");
+            print_animal();
         }
     }
-
 
     Ok(())
 }
