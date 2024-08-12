@@ -18,32 +18,36 @@ To install Hiphant, you need to have Rust and Cargo installed on your system. If
 
    ```bash
    git clone https://github.com/yourusername/hiphant.git
-   cd hiphant
-Build the project:
 
-bash
-Copy code
-cargo build --release
+2. Build the project:
+
+   ```bash
+   cargo build --release
+
 Install the binary globally:
 
-bash
-Copy code
+```bash
 cargo install --path .
+```
 Copy the elephant ASCII art files to the configuration directory:
 
-bash
 Copy code
-mkdir -p ~/.config/hiphant/animals
-cp animals/*.txt ~/.config/hiphant/animals/
-Usage
+```bash
+   mkdir -p ~/.config/hiphant/animals
+   cp animals/*.txt ~/.config/hiphant/animals/
+
+```
+### Usage
 Once installed, you can run Hiphant from the command line:
 
-bash
-Copy code
-hiphant [OPTIONS]
-Options
--n, --number <NUMBER>: Specify the elephant design number (e.g., 1, 2, 3).
--s, --smile: Use a smiling eye for the elephant.
--m, --message <MESSAGE>: Display a custom message with the elephant.
--f, --file <FILE>: Specify a custom path to an elephant template file.
--i, --stdin: Read the message from standard input instead of an argument.
+```bash
+   hiphant [OPTIONS]
+
+   Options
+
+   -n, --number <NUMBER>: Specify the elephant design number (e.g., 1, 2, 3).
+   -s, --smile: Use a smiling eye for the elephant.
+   -m, --message <MESSAGE>: Display a custom message with the elephant.
+   -f, --file <FILE>: Specify a custom path to an elephant template file.
+   -i, --stdin: Read the message from standard input instead of an argument.cd hiphant
+```
