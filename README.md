@@ -27,7 +27,7 @@ To install Hiphant, you need to have Rust and Cargo installed on your system. If
 Install the binary globally:
 
 ```bash
-cargo install --path .
+cargo install --path ./
 ```
 Copy the elephant ASCII art files to the configuration directory:
 
