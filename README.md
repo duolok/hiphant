@@ -1,6 +1,6 @@
 # Hiphant
 
-Hiphant is a fun command-line application that prints ASCII art elephants with customizable features. This project is what happens on a Sunday when I'm bored.
+Hiphant is a fun command-line application that prints ASCII art elephants with customizable features. This project is what happens on a Sunday afternoon when I'm bored.
 
 ## Features
 
