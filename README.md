@@ -51,5 +51,5 @@ Once installed, you can run Hiphant from the command line:
    -s, --smile: Use a smiling eye for the elephant.
    -m, --message <MESSAGE>: Display a custom message with the elephant.
    -f, --file <FILE>: Specify a custom path to an elephant template file.
-   -i, --stdin: Read the message from standard input instead of an argument.cd hiphant
+   -i, --stdin: Read the message from standard input instead of an argument.
 ```
