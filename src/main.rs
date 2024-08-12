@@ -5,36 +5,42 @@ use colored::Colorize;
 
 #[derive(Parser)]
 struct Options {
-
-    #[clap(default_value="Memory overload")]
+    #[clap(default_value = "Memory overload")]
+    /// Message to display with the elephant
     message: String,
 
-    #[clap(short='s', long="smile")]
+    #[clap(short = 's', long = "smile")]
     /// Give animal happy eyes
     happy: bool,
 
-    #[clap(short='f', long="file")]
-    /// Add a path to a file
+    #[clap(short = 'f', long = "file")]
+    /// Add a path to a file containing an elephant template
     elephant_file: Option<std::path::PathBuf>,
 
-    #[clap(short='i', long="stdin")]
-    /// Read the message from STDIN intead of the argument
+    #[clap(short = 'i', long = "stdin")]
+    /// Read the message from STDIN instead of the argument
     stdin: bool,
 }
 
 fn process_input(options: &Options, message: &mut String) -> Result<()> {
     match options.stdin {
-        true => { io::stdin().read_to_string(message).context("Failed read from stdin.")?;},
-        false => { *message = options.message.clone() },
+        true => {
+            io::stdin()
+                .read_to_string(message)
+                .context("Failed to read from stdin.")?;
+        }
+        false => {
+            *message = options.message.clone();
+        }
     }
     Ok(())
 }
 
-fn print_animal() {
-            println!("
-     _.-- ,.--. 
+fn print_animal(eye: &str) {
+    println!(
+"    _.-- ,.--. 
    .'   .'    /\\
-   | @       |'..--------._
+   | {eye}       |'..--------._
   /      \\._/              '.
  /  .-.-                     \\
 (  /    \\                     \\
@@ -45,38 +51,39 @@ fn print_animal() {
             |   |./'  :__ \\.-'
             '--'
 "
-            );
+    );
 }
 
 fn main() -> Result<()> {
     let options = Options::parse();
     let mut message = String::new();
 
+    // Process input from either stdin or default message
     process_input(&options, &mut message)?;
 
-    let happy_eye = if options.happy { "^" } else { "o" };
-    
+    let happy_eye = if options.happy { "^" } else { "@" };
+
     match &options.elephant_file {
         Some(path) => {
-            let elephant_templatae = std::fs::read_to_string(path).with_context(
-                || format!("Could not read file {:?}", path))?;
+            let elephant_template = std::fs::read_to_string(path).with_context(|| {
+                format!("Could not read file {:?}", path)
+            })?;
 
-            let eye = format!("{}", happy_eye.blue().bold());
-            let _elephant_picture = elephant_templatae.replace("{eye}", &eye);
-            println!(
-                "{}",
-                message.bright_green().underline().on_cyan()
-                );
-            println!("{}", &_elephant_picture);
-        }, 
+            let eye = format!("{}", happy_eye.blue().bold().on_cyan());
+            let elephant_picture = elephant_template.replace("{eye}", &eye);
+
+            println!("{}", message.bright_green().underline().on_blue());
+            println!("{}", &elephant_picture);
+        }
         None => {
-            println!("{}", message.bright_cyan().underline());
+            println!("{}", message.bright_cyan().bold().on_black());
             println!(" \\");
             println!("  \\");
             println!("   \\");
-            print_animal();
+            print_animal(&happy_eye);
         }
     }
 
     Ok(())
 }
+
