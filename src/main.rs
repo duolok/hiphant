@@ -27,6 +27,15 @@ fn process_input(options: &Options, message: &mut String) -> Result<()> {
         true => { io::stdin().read_to_string(message).context("Failed read from stdin.")?;},
         false => { *message = options.message.clone() },
     }
+    Ok(())
+}
+
+fn main() -> Result<()> {
+    let options = Options::parse();
+    let mut message = String::new();
+
+    process_input(&options, &mut message)?;
+
 
     let happy_eye = if options.happy { "^" } else { "o" };
     
@@ -45,20 +54,9 @@ fn process_input(options: &Options, message: &mut String) -> Result<()> {
         }, 
         None => {
 
+        }
     }
-    }
 
-
-    Ok(())
-}
-
-fn main() -> Result<()> {
-    let options = Options::parse();
-    let mut message = String::new();
-
-    process_input(&options, &mut message)?;
-
-    println!("{}", &message.on_red());
 
     Ok(())
 }
