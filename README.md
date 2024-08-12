@@ -16,13 +16,15 @@ To install Hiphant, you need to have Rust and Cargo installed on your system. If
 
 1. Clone the repository:
 
-   ```bash
+```bash
    git clone https://github.com/yourusername/hiphant.git
+```
 
 2. Build the project:
 
-   ```bash
+```bash
    cargo build --release
+```
 
 Install the binary globally:
 
