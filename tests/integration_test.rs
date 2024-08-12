@@ -1,8 +1,6 @@
 use std::process::Command;
 use assert_cmd::prelude::*;
 use predicates::prelude::*;
-use std::io::Write;
-use std::fs::File;
 
 #[test]
 fn run_with_defaults() {
